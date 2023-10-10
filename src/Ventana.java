@@ -18,6 +18,24 @@ public class Ventana {
                         return false;
                 }
             }
+
+            if(codigo.charAt(i) == '[')
+                p.insertar('[');
+            else{
+                if(codigo.charAt(i) == ']'){
+                    if(p.eliminar() != '[')
+                        return false;
+                }
+            }
+
+            if(codigo.charAt(i) == '{')
+                p.insertar('{');
+            else{
+                if(codigo.charAt(i) == '}'){
+                    if(p.eliminar() != '{')
+                        return false;
+                }
+            }
         }
         if(p.esVacia())
             return true;
