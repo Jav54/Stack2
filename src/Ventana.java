@@ -6,6 +6,7 @@ public class Ventana {
     private JPanel principal;
     private JTextField txtTexto;
     private JButton btnVerificar;
+    private JTextArea txtElementos;
 
     public boolean balanceado (String codigo) throws Exception {
         Pila p = new Pila();
@@ -42,6 +43,26 @@ public class Ventana {
         return false;
     }
 
+    public String contarApertura (String codigo) {
+        Pila p = new Pila();
+        int apertura = 0;
+        for (int i = 0; i < codigo.length(); i++) {
+            if (codigo.charAt(i) == '(' || codigo.charAt(i) == '[' || codigo.charAt(i) == '{')
+                apertura++;
+        }
+        return "Hay " + Integer.toString(apertura) + " elementos de apertura \n";
+    }
+
+    public String contarCierre (String codigo) {
+        Pila p = new Pila();
+        int cierre = 0;
+        for (int i = 0; i < codigo.length(); i++) {
+            if (codigo.charAt(i) == ')' || codigo.charAt(i) == ']' || codigo.charAt(i) == '}')
+                cierre++;
+        }
+        return "Hay " + Integer.toString(cierre) + " elementos de cierre \n";
+    }
+
     public Ventana() {
 
         btnVerificar.addActionListener(new ActionListener() {
@@ -55,8 +76,9 @@ public class Ventana {
                         JOptionPane.showMessageDialog(null, "Codigo no equilibrado");
                 }
                 catch (Exception ex){
-                    JOptionPane.showMessageDialog(null,"Faltaba apertura "+ex.getMessage());
+                    JOptionPane.showMessageDialog(null,"Falta un signo de apertura: "+ex.getMessage());
                 }
+                txtElementos.setText(contarApertura(texto) + contarCierre(texto));
             }
         });
     }
